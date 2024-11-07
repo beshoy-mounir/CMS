@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 // images
-import logo from "../../Images/hms.ico";
+import logo from "../../Images/HMS.ico";
 // icon
 import { FaUserCircle } from "react-icons/fa";
 import { MdDarkMode, MdWbSunny } from "react-icons/md";
