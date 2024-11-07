@@ -29,7 +29,7 @@ const NavBar = () => {
                     <Link to="/" className="flex justify-between gap-4">
                         <img src={logo} className="h-8" alt="HMS Logo" />
                         <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-                            HMS
+                            CMS
                         </span>
                     </Link>
                     {/* Buttons */}
@@ -58,22 +58,22 @@ const NavBar = () => {
                             </div>
                             <Link
                                 to=""
-                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white dark:hover:text-white">
+                                className="block px-4 py-2 text-sm rounded-lg text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white dark:hover:text-blue-400">
                                 Profile
                             </Link>
                             <Link
                                 to=""
-                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white dark:hover:text-white">
+                                className="block px-4 py-2 text-sm rounded-lg text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white dark:hover:text-blue-400">
                                 My Reservation
                             </Link>
                             <Link
                                 to=""
-                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white dark:hover:text-white">
+                                className="block px-4 py-2 text-sm rounded-lg text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white dark:hover:text-blue-400">
                                 Support
                             </Link>
                             <Link
                                 to=""
-                                className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:red-600 dark:hover:text-white">
+                                className="block px-4 py-2 text-sm rounded-lg text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:red-600 dark:hover:text-white">
                                 Sign out
                             </Link>
                         </div>
@@ -104,19 +104,19 @@ const NavBar = () => {
                             dropM ? "" : "hidden"
                         } w-full md:flex md:w-auto md:order-1`}
                         id="navbar-user">
-                        <div className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                        <div className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 ">
                             <Link
-                                className="dark:text-white hover:text-primaly"
+                                className="dark:text-white hover:text-primaly dark:hover:text-blue-400"
                                 to="/doctors">
                                 Doctors
                             </Link>
                             <Link
-                                className="dark:text-white hover:text-primaly"
+                                className="dark:text-white hover:text-primaly dark:hover:text-blue-400"
                                 to="/reservation">
                                 Reservation
                             </Link>
                             <Link
-                                className="dark:text-white hover:text-primaly"
+                                className="dark:text-white hover:text-primaly dark:hover:text-blue-400"
                                 to="/contactus">
                                 Contact Us
                             </Link>
