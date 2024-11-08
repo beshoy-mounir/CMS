@@ -51,6 +51,7 @@ const DoctorsIteration = ({ doctor }) => {
                             <Rating
                                 className="hover:cursor-default"
                                 value={doctor.rate[0]}
+                                unratedColor="yellow"
                                 readonly
                             />{" "}
                         </div>
