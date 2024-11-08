@@ -104,19 +104,19 @@ const NavBar = () => {
                             dropM ? "" : "hidden"
                         } w-full md:flex md:w-auto md:order-1`}
                         id="navbar-user">
-                        <div className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 ">
+                        <div className="flex flex-col cxs:gap-2 csm:gap-2 cmd:gap-2  font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 ">
                             <Link
-                                className="dark:text-white hover:text-primaly dark:hover:text-blue-400"
+                                className="dark:text-white hover:text-primaly dark:hover:text-blue-400 rounded-md cxs:bg-gray-700 cxs:p-2 csm:bg-gray-700 csm:p-2 cmd:bg-gray-700 cmd:p-2"
                                 to="/doctors">
                                 Doctors
                             </Link>
                             <Link
-                                className="dark:text-white hover:text-primaly dark:hover:text-blue-400"
+                                className="dark:text-white hover:text-primaly dark:hover:text-blue-400 rounded-md cxs:bg-gray-700 cxs:p-2 csm:bg-gray-700 csm:p-2 cmd:bg-gray-700 cmd:p-2"
                                 to="/reservation">
                                 Reservation
                             </Link>
                             <Link
-                                className="dark:text-white hover:text-primaly dark:hover:text-blue-400"
+                                className="dark:text-white hover:text-primaly dark:hover:text-blue-400 rounded-md cxs:bg-gray-700 cxs:p-2 csm:bg-gray-700 csm:p-2 cmd:bg-gray-700 cmd:p-2"
                                 to="/contactus">
                                 Contact Us
                             </Link>
@@ -136,7 +136,7 @@ const NavBar = () => {
                                         eTh("light");
                                     }}
                                     className="group">
-                                    <MdWbSunny className="text-white size-6 group-hover:text-yellow-500" />
+                                    <MdWbSunny className="text-white size-6 group-hover:text-yellow-500 " />
                                 </div>
                             )}
                         </div>
