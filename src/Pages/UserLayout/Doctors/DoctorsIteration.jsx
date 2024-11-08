@@ -8,11 +8,7 @@ import { MdAccessTime } from "react-icons/md";
 
 const DoctorsIteration = ({ doctor }) => {
     return (
-        // <div className="flex justify-between items-center w-full p-6 mx-auto rounded-xl text-lg bg-white text-black shadow-2xl">
-        //     <span className="w-36 text-center">{doctor.availability}</span>
-        //     <Button className="w-28 text-center">Reserve</Button>
-        // </div>
-        <div className="flex cxs:flex-col cxs:items-center csm:flex-col csm:items-center cmd:flex-col cmd:items-center clg:flex-col clg:items-center justify-evenly items-start h-fit p-8 bg-white rounded-xl">
+        <div className="flex cxs:flex-col cxs:items-center csm:flex-col csm:items-center cmd:flex-col cmd:items-center clg:flex-col clg:items-center justify-evenly items-start h-fit p-8 bg-white dark:bg-gray-600 rounded-xl">
             {/* image */}
             <div>
                 <img
@@ -23,9 +19,9 @@ const DoctorsIteration = ({ doctor }) => {
             </div>
             {/* info */}
             <div className="flex justify-evenly items-center flex-grow">
-                <div className="flex flex-col justify-center gap-5 text-md flex-grow cxs:mx-0 csm:mx-0 cmd:mx-5 mx-10 c2xl:mx-20">
+                <div className="flex flex-col justify-center gap-5 text-md flex-grow cxs:mx-0 csm:mx-0 cmd:mx-5 mx-10 c2xl:mx-20 dark:text-white">
                     <span>
-                        <sup className="text-primaly">Doctor : </sup>
+                        <sup className="text-blue-400">Doctor : </sup>
                         {doctor.firstname}
                     </span>
                     <span>
