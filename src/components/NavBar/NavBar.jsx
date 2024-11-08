@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 // images
-import logo from "../../Images/HMS.ico";
+import logo from "../../Images/CMS.ico";
 // icon
 import { FaUserCircle } from "react-icons/fa";
 import { MdDarkMode, MdWbSunny } from "react-icons/md";
@@ -23,7 +23,7 @@ const NavBar = () => {
     }, [th]);
 
     return (
-        <div>
+        <div className="sticky top-0 z-[1000] shadow-2xl">
             <nav className="bg-white border-gray-200 dark:bg-gray-900">
                 <div className="w-11/12 flex flex-wrap items-center justify-between mx-auto p-4">
                     <Link to="/" className="flex justify-between gap-4">
