@@ -1,6 +1,9 @@
 import React from "react";
 import { Button } from "@material-tailwind/react";
 import { Rating } from "@material-tailwind/react";
+// images
+import doctorImage from "../../../Images/doctor.jpg";
+
 // icons
 import { FaLocationDot } from "react-icons/fa6";
 import { FaMoneyBillAlt } from "react-icons/fa";
@@ -11,11 +14,19 @@ const DoctorsIteration = ({ doctor }) => {
         <div className="flex cxs:flex-col cxs:items-center csm:flex-col csm:items-center cmd:flex-col cmd:items-center clg:flex-col clg:items-center justify-evenly items-start h-fit p-8 bg-white dark:bg-gray-600 rounded-xl">
             {/* image */}
             <div>
-                <img
-                    className="size-52 rounded-full"
-                    src={doctor.image}
-                    alt={`Doctor ${doctor.firstname} ${doctor.lastname} image`}
-                />
+                {doctor.image == "" ? (
+                    <img
+                        className="size-52 rounded-full"
+                        src={doctorImage}
+                        alt={`Doctor ${doctor.firstname} ${doctor.lastname} image`}
+                    />
+                ) : (
+                    <img
+                        className="size-52 rounded-full"
+                        src={doctor.image}
+                        alt={`Doctor ${doctor.firstname} ${doctor.lastname} image`}
+                    />
+                )}
             </div>
             {/* info */}
             <div className="flex justify-evenly items-center flex-grow">
