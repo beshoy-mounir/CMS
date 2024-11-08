@@ -11,7 +11,7 @@ module.exports = withMT({
     theme: {
         colors: {
             primaly: "#0e88a0",
-            blue: "#42a5f5",
+            bluee: "#ADD8E6",
         },
         extend: {
             screens: {

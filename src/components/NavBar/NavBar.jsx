@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 // images
 import logo from "../../Images/CMS.ico";
-// icon
+// icons
 import { FaUserCircle } from "react-icons/fa";
 import { MdDarkMode, MdWbSunny } from "react-icons/md";
 import { Link } from "react-router-dom";
@@ -49,7 +49,7 @@ const NavBar = () => {
                                 profileM ? "" : "hidden"
                             } text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600`}>
                             <div className="px-4 py-3">
-                                <span className="w-full block text-sm text-blue-400 dark:text-blue-400">
+                                <span className="w-full block text-sm text-blue-400  dark:text-bluee">
                                     Beshoy
                                 </span>
                                 <span className="w-full block text-sm  text-gray-500 truncate dark:text-white">
@@ -106,17 +106,17 @@ const NavBar = () => {
                         id="navbar-user">
                         <div className="flex flex-col cxs:gap-2 csm:gap-2 cmd:gap-2  font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 ">
                             <Link
-                                className="dark:text-white hover:text-primaly dark:hover:text-blue-400 rounded-md cxs:bg-gray-700 cxs:p-2 csm:bg-gray-700 csm:p-2 cmd:bg-gray-700 cmd:p-2"
+                                className="dark:text-white hover:text-primaly dark:hover:text-blue-400 rounded-md dark:cxs:bg-gray-700 cxs:p-2 dark:csm:bg-gray-700 csm:p-2 "
                                 to="/doctors">
                                 Doctors
                             </Link>
                             <Link
-                                className="dark:text-white hover:text-primaly dark:hover:text-blue-400 rounded-md cxs:bg-gray-700 cxs:p-2 csm:bg-gray-700 csm:p-2 cmd:bg-gray-700 cmd:p-2"
+                                className="dark:text-white hover:text-primaly dark:hover:text-blue-400 rounded-md dark:cxs:bg-gray-700 cxs:p-2 dark:csm:bg-gray-700 csm:p-2 "
                                 to="/reservation">
                                 Reservation
                             </Link>
                             <Link
-                                className="dark:text-white hover:text-primaly dark:hover:text-blue-400 rounded-md cxs:bg-gray-700 cxs:p-2 csm:bg-gray-700 csm:p-2 cmd:bg-gray-700 cmd:p-2"
+                                className="dark:text-white hover:text-primaly dark:hover:text-blue-400 rounded-md dark:cxs:bg-gray-700 cxs:p-2 dark:csm:bg-gray-700 csm:p-2 "
                                 to="/contactus">
                                 Contact Us
                             </Link>
