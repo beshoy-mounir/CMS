@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import DoctorsIteration from "./DoctorsIteration";
 import { Spinner } from "@material-tailwind/react";
+// icons
+import { IoFilter } from "react-icons/io5";
 
 const Doctors = () => {
     const [doctors, eDoctors] = useState(null);
@@ -18,6 +20,10 @@ const Doctors = () => {
             <div className="flex flex-col items-center w-full  bg-primaly dark:bg-gray-800">
                 <span className=" w-3/4 my-10 p-5 rounded-xl text-2xl text-white font-black">
                     ALL Doctors
+                </span>
+                <span className="flex gap-3 w-3/4 p-5 rounded-xl text-2xl text-white font-bold">
+                    <IoFilter />
+                    Filter
                 </span>
                 <div className="w-full h-2/3">
                     {doctors != null ? (
