@@ -16,14 +16,14 @@ const Doctors = () => {
     useEffect(() => {
         axios({
             method: "get",
-            url: "https://doctores.glitch.me/Doctors",
+            url: "https://cms-doctors.glitch.me/doctors",
         }).then(({ data }) => eDoctors(data));
     }, []);
     return (
         <div className="relative">
             <div className="relative flex flex-col items-center w-full  bg-primaly dark:bg-gray-800">
                 {/* Banner */}
-                <div className="relative flex justify-between items-center w-full h-48 c2xl:h-60 mb-10 dark:text-white bg-white dark:bg-gray-700 shadow-lg ">
+                <div className="relative flex justify-between items-center w-full h-48 clg:h-60 cxl:h-60 c2xl:h-60 mb-10 dark:text-white bg-white dark:bg-gray-700 shadow-lg select-none">
                     {/* Banner Image */}
                     <img
                         className="absolute cxs:hidden csm:hidden cmd:hidden right-0 h-full"
@@ -37,7 +37,8 @@ const Doctors = () => {
                         </h1>
                         <h2 className="flex gap-3 items-center">
                             Call Us On
-                            <FaPhoneAlt />: 01281245667{" "}
+                            <FaPhoneAlt />:{" "}
+                            <span className="select-text">01281245667</span>
                         </h2>
                         <span>We Have More Than {doctors?.length} Doctors</span>
                         <span>Ready To Help you</span>

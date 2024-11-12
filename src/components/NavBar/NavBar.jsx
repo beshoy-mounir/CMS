@@ -23,7 +23,7 @@ const NavBar = () => {
     }, [th]);
 
     return (
-        <div className="sticky top-0 z-[1000] shadow-2xl">
+        <div className="sticky top-0 z-[1000] shadow-2xl select-none">
             <nav className="bg-white border-gray-200 dark:bg-gray-900">
                 <div className="w-11/12 flex flex-wrap items-center justify-between mx-auto p-4">
                     <Link to="/" className="flex justify-between gap-4">
@@ -35,14 +35,25 @@ const NavBar = () => {
                     {/* Buttons */}
                     <div className="relative flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                         {/* Profile Menu Button */}
-                        <button
-                            onClick={() => eProfileM(!profileM)}
-                            className="relative flex flex-col justify-center items-center dark:focus:ring-gray-600">
-                            <div>
-                                <span className="sr-only">Open user menu</span>
-                                <FaUserCircle className="size-6 text-white bg-black rounded-full hover:bg-blue-400" />
-                            </div>
-                        </button>
+                        {/* Login Button */}
+                        {localStorage.pi != undefined ? (
+                            <button
+                                onClick={() => eProfileM(!profileM)}
+                                className="relative flex flex-col justify-center items-center dark:focus:ring-gray-600">
+                                <div>
+                                    <span className="sr-only">
+                                        Open user menu
+                                    </span>
+                                    <FaUserCircle className="size-6 text-white bg-black rounded-full hover:bg-blue-400" />
+                                </div>
+                            </button>
+                        ) : (
+                            <Link
+                                to="/login"
+                                className="py-1 px-5 rounded-md outline outline-1 outline-black dark:text-white dark:outline-white dark:bg-gray-700">
+                                Login
+                            </Link>
+                        )}
                         {/* Profile Menu */}
                         <div
                             className={`absolute top-10 -left-40 clg:-left-48 cmd:-left-48  z-50 w-60 ${
@@ -72,7 +83,10 @@ const NavBar = () => {
                                 Support
                             </Link>
                             <Link
-                                to=""
+                                onClick={() => {
+                                    localStorage.removeItem("pi");
+                                    location.reload();
+                                }}
                                 className="block px-4 py-2 text-sm rounded-lg text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:red-600 dark:hover:text-white">
                                 Sign out
                             </Link>
