@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 // images
 import logo from "../../Images/CMS.ico";
 // icons
@@ -7,6 +8,7 @@ import { MdDarkMode, MdWbSunny } from "react-icons/md";
 import { Link } from "react-router-dom";
 const NavBar = () => {
     const [th, eTh] = useState();
+    const [user, eUser] = useState();
     const [dropM, eDropM] = useState(false);
     const [profileM, eProfileM] = useState(false);
     // Dark Mode
@@ -21,6 +23,13 @@ const NavBar = () => {
             document.documentElement.classList.remove("dark");
         }
     }, [th]);
+
+    useEffect(() => {
+        axios({
+            method: "get",
+            url: `${import.meta.env.VITE_USERS}/${localStorage.pi}`,
+        }).then(({ data }) => eUser(data));
+    }, []);
 
     return (
         <div className="sticky top-0 z-[1000] shadow-2xl select-none">
@@ -61,10 +70,10 @@ const NavBar = () => {
                             } text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600`}>
                             <div className="px-4 py-3">
                                 <span className="w-full block text-sm text-blue-400  dark:text-bluee">
-                                    Beshoy
+                                    {user?.firstname}
                                 </span>
                                 <span className="w-full block text-sm  text-gray-500 truncate dark:text-white">
-                                    beshoy_mounir22@yahoo.com
+                                    {user?.email}
                                 </span>
                             </div>
                             <Link
