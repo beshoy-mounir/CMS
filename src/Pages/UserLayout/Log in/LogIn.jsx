@@ -24,7 +24,7 @@ const LogIn = () => {
     useEffect(() => {
         axios({
             method: "get",
-            url: "https://cms-users.glitch.me/users",
+            url: `${import.meta.env.VITE_USERS}`,
         }).then(({ data }) => eUsers(data));
     }, []);
     return (

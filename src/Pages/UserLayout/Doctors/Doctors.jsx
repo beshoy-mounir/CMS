@@ -16,7 +16,7 @@ const Doctors = () => {
     useEffect(() => {
         axios({
             method: "get",
-            url: "https://cms-doctors.glitch.me/doctors",
+            url: `${import.meta.env.VITE_DOCTORS}`,
         }).then(({ data }) => eDoctors(data));
     }, []);
     return (
