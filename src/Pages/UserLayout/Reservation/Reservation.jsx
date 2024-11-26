@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Input, Option, Radio, Select } from "@material-tailwind/react";
 import axios from "axios";
 
@@ -27,6 +27,8 @@ const Reservation = ({ logedUser }) => {
         "Rheumatology",
         "Urology",
     ];
+    // Doctors
+    const [doctor, eDoctor] = useState(null);
     const [step, eStep] = useState(0);
     const [user, eUser] = useState({
         firstname: "",
@@ -34,27 +36,38 @@ const Reservation = ({ logedUser }) => {
         age: "",
         gender: "",
         specialties: "",
+        doctor: "",
         note: "",
     });
 
-    // const postData = async () => {
-    //     let old = await axios({
-    //         method: "get",
-    //         url: `${import.meta.env.VITE_USERS}/${localStorage.pi}`,
-    //     }).then(({ data }) => {
-    //         old = data;
-    //     });
+    useEffect(() => {
+        axios({
+            method: "get",
+            url: `${import.meta.env.VITE_DOCTORS}`,
+        }).then(({ data }) => eDoctor(data));
+    }, []);
 
-    //     await axios({
-    //         method: "put",
-    //         url: `${import.meta.env.VITE_USERS}/${localStorage.pi}`,
-    //         data: {
-    //             reservation: { user },
-    //         },
-    //     })
-    //         .then(() => console.log("Success"))
-    //         .catch((err) => console.log(err));
-    // };
+    const postData = async () => {
+        let old = null,
+            newObj = null;
+        await axios({
+            method: "get",
+            url: `${import.meta.env.VITE_USERS}/${localStorage.pi}`,
+        }).then(({ data }) => {
+            old = data;
+            newObj = data;
+            newObj.reservation.push(user);
+        });
+        old == newObj
+            ? ""
+            : await axios({
+                  method: "put",
+                  url: `${import.meta.env.VITE_USERS}/${localStorage.pi}`,
+                  data: old,
+              })
+                  .then(() => console.log("Success"))
+                  .catch((err) => console.log(err));
+    };
     return (
         // wrapper
         <div className="flex justify-center items-center w-full h-[90.9%] bg-primaly dark:bg-gray-800">
@@ -138,7 +151,7 @@ const Reservation = ({ logedUser }) => {
                         </div>
                     </div>
                 ) : step == 3 ? (
-                    <div className="flex flex-col justify-start items-center gap-5 h-1/2 w-1/2 cxs:w-4/5 csm:w-4/5 cmd:w-4/5 clg:w-4/5 cxl:w-2/3 bg-white px-5 py-8 rounded-lg dark:bg-gray-700  dark:text-white">
+                    <div className="flex flex-col justify-start items-center gap-5 h-fit w-1/2 cxs:w-4/5 csm:w-4/5 cmd:w-4/5 clg:w-4/5 cxl:w-2/3 bg-white px-5 py-8 rounded-lg dark:bg-gray-700  dark:text-white">
                         <span className={`${qStyle}`}>Choose Specialties</span>
                         <div className="p-2 w-full bg-white rounded-lg">
                             <Select
@@ -160,6 +173,33 @@ const Reservation = ({ logedUser }) => {
                                         {item}
                                     </Option>
                                 ))}
+                            </Select>
+                        </div>
+                        <span className={`${qStyle}`}>Choose Doctor</span>
+                        <div className="p-2 w-full bg-white rounded-lg">
+                            <Select
+                                label="Doctor"
+                                value={user.doctor}
+                                onChange={() => {}}
+                                color="blue">
+                                {doctor?.map((item, index) =>
+                                    user?.specialties == item.specialties ? (
+                                        <Option
+                                            className="text-primaly"
+                                            key={index}
+                                            value={item?.firstname}
+                                            onClick={(e) =>
+                                                eUser({
+                                                    ...user,
+                                                    doctor: item?.firstname,
+                                                })
+                                            }>
+                                            {`${item?.firstname} ${item?.lastname}`}
+                                        </Option>
+                                    ) : (
+                                        ""
+                                    )
+                                )}
                             </Select>
                         </div>
                     </div>
