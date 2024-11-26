@@ -6,9 +6,8 @@ import logo from "../../Images/CMS.ico";
 import { FaUserCircle } from "react-icons/fa";
 import { MdDarkMode, MdWbSunny } from "react-icons/md";
 import { Link } from "react-router-dom";
-const NavBar = () => {
+const NavBar = ({ user }) => {
     const [th, eTh] = useState();
-    const [user, eUser] = useState();
     const [dropM, eDropM] = useState(false);
     const [profileM, eProfileM] = useState(false);
     // Dark Mode
@@ -23,13 +22,6 @@ const NavBar = () => {
             document.documentElement.classList.remove("dark");
         }
     }, [th]);
-
-    useEffect(() => {
-        axios({
-            method: "get",
-            url: `${import.meta.env.VITE_USERS}/${localStorage.pi}`,
-        }).then(({ data }) => eUser(data));
-    }, []);
 
     return (
         <div className="sticky top-0 z-[1000] shadow-2xl select-none">
@@ -113,9 +105,9 @@ const NavBar = () => {
                                 viewBox="0 0 17 14">
                                 <path
                                     stroke="currentColor"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
                                     d="M1 1h15M1 7h15M1 13h15"
                                 />
                             </svg>
