@@ -38,6 +38,8 @@ const Reservation = ({ logedUser }) => {
         specialties: "",
         doctor: "",
         note: "",
+        date: "",
+        hour: "",
     });
 
     useEffect(() => {
@@ -213,6 +215,48 @@ const Reservation = ({ logedUser }) => {
                             }
                             className="w-3/4 h-2/3 p-3  mb-5 resize-none dark:bg-gray-600 rounded-lg outline outline-1 outline-gray-800 focus:outline-2"></textarea>
                     </div>
+                ) : step == 5 ? (
+                    <div className="flex flex-col justify-evenly items-center h-1/2 w-1/2 cxs:w-4/5 csm:w-4/5 cmd:w-4/5 clg:w-4/5 cxl:w-2/3 bg-white rounded-lg dark:bg-gray-700 dark:text-white">
+                        <span className={`${qStyle}`}>Date of Reservation</span>
+                        <div className="flex flex-col justify-between items-center gap-3 w-3/4">
+                            <Input
+                                className="dark:text-white"
+                                value={user.date}
+                                onChange={(e) =>
+                                    isNaN(e.target.value)
+                                        ? ""
+                                        : eUser({
+                                              ...user,
+                                              date: e.target.value,
+                                          })
+                                }
+                                label={
+                                    <span className="dark:text-white">
+                                        Date :
+                                    </span>
+                                }
+                                inputMode="numeric"
+                            />
+                            <Input
+                                className="dark:text-white"
+                                value={user.date}
+                                onChange={(e) =>
+                                    isNaN(e.target.value)
+                                        ? ""
+                                        : eUser({
+                                              ...user,
+                                              date: e.target.value,
+                                          })
+                                }
+                                label={
+                                    <span className="dark:text-white">
+                                        Hour
+                                    </span>
+                                }
+                                inputMode="numeric"
+                            />
+                        </div>
+                    </div>
                 ) : (
                     ""
                 )}
@@ -226,9 +270,9 @@ const Reservation = ({ logedUser }) => {
                         </Button>
                         <Button
                             onClick={() =>
-                                step == 4 ? postData() : eStep(step + 1)
+                                step == 5 ? postData() : eStep(step + 1)
                             }>
-                            {step == 4 ? "Send" : "Continue"}
+                            {step == 5 ? "Send" : "Continue"}
                         </Button>
                     </div>
                     <Button
@@ -242,7 +286,7 @@ const Reservation = ({ logedUser }) => {
                                 lastname: logedUser?.lastname,
                                 age:
                                     new Date().getFullYear() -
-                                    logedUser?.birthday.slice(-4),
+                                    logedUser?.birthday.slice(0, 4),
                                 gender: logedUser?.gender,
                             })
                         }>

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 // images
 import logo from "../../Images/CMS.ico";
 // icons
