@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@material-tailwind/react";
 import { Rating } from "@material-tailwind/react";
 // images
@@ -10,6 +11,8 @@ import { FaMoneyBillAlt } from "react-icons/fa";
 import { MdAccessTime } from "react-icons/md";
 
 const DoctorsIteration = ({ doctor }) => {
+    const navigate = useNavigate();
+
     return (
         <div className="flex cxs:flex-col cxs:items-center csm:flex-col csm:items-center cmd:flex-col cmd:items-center clg:flex-col clg:items-center justify-evenly items-start h-fit p-8 bg-white dark:bg-gray-600 rounded-xl cxs:text-xs csm:text-sm">
             {/* image */}
@@ -101,7 +104,9 @@ const DoctorsIteration = ({ doctor }) => {
                     <Button className="my-8 cxs:text-xs cxs:p-2 csm:p-3 cmd:p-3 clg:my-5">
                         More Info
                     </Button>
-                    <Button className="my-8 cxs:text-xs cxs:p-2 csm:p-3 cmd:p-3 clg:my-5 bg-green-500">
+                    <Button
+                        onClick={() => navigate("/reservation")}
+                        className="my-8 cxs:text-xs cxs:p-2 csm:p-3 cmd:p-3 clg:my-5 bg-green-500">
                         Reserve Now
                     </Button>
                     <Button className="my-8 cxs:text-xs text cxs:p-1 csm:p-2 cmd:p-3 clg:my-5 bg-blue-400">
