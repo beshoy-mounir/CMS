@@ -31,8 +31,8 @@ const Reservation = ({ logedUser }) => {
     const [doctor, eDoctor] = useState(null);
     const [step, eStep] = useState(0);
     const [user, eUser] = useState({
-        firstname: "",
-        lastname: "",
+        firstname: null,
+        lastname: null,
         age: "",
         gender: "",
         specialties: "",
@@ -41,6 +41,50 @@ const Reservation = ({ logedUser }) => {
         date: "",
         hour: "",
     });
+    const [error, eError] = useState({
+        firstname: false,
+        lastname: false,
+        age: false,
+        gender: false,
+        specialties: false,
+        doctor: false,
+        date: false,
+        hour: false,
+    });
+
+    const next = () => {
+        user.firstname == null
+            ? eError({ ...error, firstname: true })
+            : eError({ ...error, firstname: false });
+        user.lastname == ""
+            ? eError({ ...error, lastname: true })
+            : eError({ ...error, lastname: false });
+        user.age == ""
+            ? eError({ ...error, age: true })
+            : eError({ ...error, age: false });
+        user.gender == ""
+            ? eError({ ...error, gender: true })
+            : eError({ ...error, gender: false });
+        user.specialties == ""
+            ? eError({ ...error, specialties: true })
+            : eError({ ...error, specialties: false });
+        user.doctor == ""
+            ? eError({ ...error, doctor: true })
+            : eError({ ...error, doctor: false });
+        user.date == ""
+            ? eError({ ...error, date: true })
+            : eError({ ...error, date: false });
+        user.hour == ""
+            ? eError({ ...error, hour: true })
+            : eError({ ...error, hour: false });
+
+        step == 0 ? eStep(step + 1) : "";
+        step == 1 && !error.firstname && !error.lastname ? eStep(step + 1) : "";
+        step == 2 && !error.age && !error.gender ? eStep(step + 1) : "";
+        step == 3 && !error.specialties && !error.doctor ? eStep(step + 1) : "";
+        step == 4 && !error.date && !error.hour ? eStep(step + 1) : "";
+        step == 5 ? postData() : "";
+    };
 
     useEffect(() => {
         axios({
@@ -49,26 +93,18 @@ const Reservation = ({ logedUser }) => {
         }).then(({ data }) => eDoctor(data));
     }, []);
 
-    const postData = async () => {
-        let old = null,
-            newObj = null;
-        await axios({
-            method: "get",
+    const postData = () => {
+        const newUser = { ...logedUser };
+        newUser.reservation.push(user);
+        axios({
+            method: "put",
             url: `${import.meta.env.VITE_USERS}/${localStorage.pi}`,
-        }).then(({ data }) => {
-            old = data;
-            newObj = data;
-            newObj.reservation.push(user);
-        });
-        old == newObj
-            ? ""
-            : await axios({
-                  method: "put",
-                  url: `${import.meta.env.VITE_USERS}/${localStorage.pi}`,
-                  data: old,
-              })
-                  .then(() => console.log("Success"))
-                  .catch((err) => console.log(err));
+            data: newUser,
+        })
+            .then(() => {
+                console.log("Success");
+            })
+            .catch((err) => console.log(err));
     };
     return (
         // wrapper
@@ -94,6 +130,7 @@ const Reservation = ({ logedUser }) => {
                                     First Name
                                 </span>
                             }
+                            error={error.firstname}
                         />
                         <Input
                             className="dark:text-white"
@@ -106,6 +143,7 @@ const Reservation = ({ logedUser }) => {
                                     Last Name
                                 </span>
                             }
+                            error={error.lastname}
                         />
                     </div>
                 ) : step == 2 ? (
@@ -122,6 +160,7 @@ const Reservation = ({ logedUser }) => {
                             label={<span className="dark:text-white">Age</span>}
                             inputMode="numeric"
                             maxLength={2}
+                            error={error.age}
                         />
                         <div className="flex justify-evenly w-full">
                             <Radio
@@ -136,6 +175,7 @@ const Reservation = ({ logedUser }) => {
                                 onClick={() =>
                                     eUser({ ...user, gender: "male" })
                                 }
+                                error={error.gender}
                             />
                             <Radio
                                 name="gender"
@@ -149,6 +189,7 @@ const Reservation = ({ logedUser }) => {
                                 onClick={() =>
                                     eUser({ ...user, gender: "female" })
                                 }
+                                error={error.gender}
                             />
                         </div>
                     </div>
@@ -160,7 +201,8 @@ const Reservation = ({ logedUser }) => {
                                 label="Specialties"
                                 value={user.specialties}
                                 onChange={() => {}}
-                                color="blue">
+                                color="blue"
+                                error={error.specialties}>
                                 {medicalSpecialties.map((item, index) => (
                                     <Option
                                         className="text-primaly"
@@ -232,20 +274,21 @@ const Reservation = ({ logedUser }) => {
                                 }
                                 label={
                                     <span className="dark:text-white">
-                                        Date :
+                                        Date
                                     </span>
                                 }
                                 inputMode="numeric"
+                                error={error.date}
                             />
                             <Input
                                 className="dark:text-white"
-                                value={user.date}
+                                value={user.hour}
                                 onChange={(e) =>
                                     isNaN(e.target.value)
                                         ? ""
                                         : eUser({
                                               ...user,
-                                              date: e.target.value,
+                                              hour: e.target.value,
                                           })
                                 }
                                 label={
@@ -254,6 +297,7 @@ const Reservation = ({ logedUser }) => {
                                     </span>
                                 }
                                 inputMode="numeric"
+                                error={error.hour}
                             />
                         </div>
                     </div>
@@ -268,10 +312,7 @@ const Reservation = ({ logedUser }) => {
                             className={`${step == 0 ? "hidden" : ""}`}>
                             Back
                         </Button>
-                        <Button
-                            onClick={() =>
-                                step == 5 ? postData() : eStep(step + 1)
-                            }>
+                        <Button onClick={() => next()}>
                             {step == 5 ? "Send" : "Continue"}
                         </Button>
                     </div>

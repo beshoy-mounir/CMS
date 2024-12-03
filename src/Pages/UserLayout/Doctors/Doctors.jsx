@@ -34,7 +34,7 @@ const Doctors = () => {
     ];
     const [doctors, eDoctors] = useState(null);
     const [showFilter, eShowFilter] = useState(false);
-    const [filterd, eFilterd] = useState("Cardiology");
+    const [filterd, eFilterd] = useState(null);
 
     useEffect(() => {
         axios({
