@@ -1,7 +1,5 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Button } from "@material-tailwind/react";
-import { Rating } from "@material-tailwind/react";
+import { Button, Rating } from "@material-tailwind/react";
 // images
 import doctorImage from "../../../Images/doctor.jpg";
 
@@ -10,7 +8,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import { FaMoneyBillAlt } from "react-icons/fa";
 import { MdAccessTime } from "react-icons/md";
 
-const DoctorsIteration = ({ doctor }) => {
+const DoctorsIteration = ({ doctor, eDoctorInfo, eShowInfo }) => {
     const navigate = useNavigate();
 
     return (
@@ -101,19 +99,22 @@ const DoctorsIteration = ({ doctor }) => {
                 </div>
                 {/* Clinic Hours */}
                 <div className="flex flex-col justify-evenly items-center">
-                    <Button className="my-8 cxs:text-xs cxs:p-2 csm:p-3 cmd:p-3 clg:my-5">
-                        More Info
-                    </Button>
                     <Button
                         onClick={() => navigate("/reservation")}
-                        className="my-8 cxs:text-xs cxs:p-2 csm:p-3 cmd:p-3 clg:my-5 bg-green-500">
+                        className="w-[203px] my-8 cxs:text-xs cxs:p-2 csm:p-2 cmd:p-3 clg:my-5 bg-blue-400 cxs:w-20 csm:w-44 cmd:w-44">
                         Reserve Now
                     </Button>
-                    <Button className="my-8 cxs:text-xs text cxs:p-1 csm:p-2 cmd:p-3 clg:my-5 bg-blue-400">
+                    <Button
+                        onClick={() => {
+                            eDoctorInfo(doctor);
+                            eShowInfo(true);
+                        }}
+                        className="my-8 cxs:text-xs text cxs:p-1 csm:p-2 cmd:p-3 clg:my-5 ">
                         Contact the Assistant
                     </Button>
                 </div>
             </div>
+            {/* Contact Assistant */}
         </div>
     );
 };

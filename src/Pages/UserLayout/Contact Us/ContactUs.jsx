@@ -9,12 +9,11 @@ const ContactUs = () => {
         reset,
     } = useForm();
     const onSubmit = async (data) => {
-        console.log(data);
         reset();
     };
     return (
         <div
-            className={`flex justify-center min-h-[90.9%] h-fit bg-primaly dark:bg-gray-800 `}>
+            className={`flex justify-center min-h-[90.9%] h-fit bg-gray-200 dark:bg-gray-800 shadow-xl`}>
             <div className="flex justify-center items-center w-4/5 cxs:w-full h-[90.9%] cxs:m-0 csm:m-0 cmd:m-0 my-14">
                 <form
                     onSubmit={handleSubmit(onSubmit)}
