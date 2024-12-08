@@ -30,6 +30,19 @@ const Home = () => {
                     </div>
                     <div className="flex flex-col justify-evenly gap-5">
                         <span className="text-2xl font-bold text-primaly dark:text-bluee">
+                            Website
+                        </span>
+                        <div className="flex flex-col gap-1">
+                            <span>Fast & Responsive</span>
+                            <span>User Friendly</span>
+                            <span>Maintained</span>
+                        </div>
+                    </div>
+                </div>
+                {/* 3 */}
+                <div className="flex justify-center">
+                    <div className="flex flex-col gap-5">
+                        <span className="text-2xl font-bold text-primaly dark:text-bluee">
                             About Us
                         </span>
                         <div className="flex flex-col gap-1">
@@ -42,7 +55,6 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-                {/* 3 */}
                 <div className="flex flex-col gap-5 w-2/3 p-8 m-auto cxs:w-full csm:w-full cmd:w-full clg:w-full">
                     <span className="text-center text-2xl font-bold text-primaly dark:text-bluee">
                         Schedule Appointment

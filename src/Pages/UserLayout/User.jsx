@@ -20,7 +20,7 @@ const User = () => {
     }, []);
 
     return (
-        <div className="h-lvh">
+        <div className="h-lvh bg-gray-200">
             <NavBar user={user} />
             <Routes>
                 <Route path="/*" element={<Home />} />

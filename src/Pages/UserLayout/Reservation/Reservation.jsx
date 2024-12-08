@@ -31,8 +31,8 @@ const Reservation = ({ logedUser }) => {
     const [doctor, eDoctor] = useState(null);
     const [step, eStep] = useState(0);
     const [user, eUser] = useState({
-        firstname: null,
-        lastname: null,
+        firstname: "",
+        lastname: "",
         age: "",
         gender: "",
         specialties: "",
@@ -41,50 +41,8 @@ const Reservation = ({ logedUser }) => {
         date: "",
         hour: "",
     });
-    const [error, eError] = useState({
-        firstname: false,
-        lastname: false,
-        age: false,
-        gender: false,
-        specialties: false,
-        doctor: false,
-        date: false,
-        hour: false,
-    });
 
-    const next = () => {
-        user.firstname == null
-            ? eError({ ...error, firstname: true })
-            : eError({ ...error, firstname: false });
-        user.lastname == ""
-            ? eError({ ...error, lastname: true })
-            : eError({ ...error, lastname: false });
-        user.age == ""
-            ? eError({ ...error, age: true })
-            : eError({ ...error, age: false });
-        user.gender == ""
-            ? eError({ ...error, gender: true })
-            : eError({ ...error, gender: false });
-        user.specialties == ""
-            ? eError({ ...error, specialties: true })
-            : eError({ ...error, specialties: false });
-        user.doctor == ""
-            ? eError({ ...error, doctor: true })
-            : eError({ ...error, doctor: false });
-        user.date == ""
-            ? eError({ ...error, date: true })
-            : eError({ ...error, date: false });
-        user.hour == ""
-            ? eError({ ...error, hour: true })
-            : eError({ ...error, hour: false });
-
-        step == 0 ? eStep(step + 1) : "";
-        step == 1 && !error.firstname && !error.lastname ? eStep(step + 1) : "";
-        step == 2 && !error.age && !error.gender ? eStep(step + 1) : "";
-        step == 3 && !error.specialties && !error.doctor ? eStep(step + 1) : "";
-        step == 4 && !error.date && !error.hour ? eStep(step + 1) : "";
-        step == 5 ? postData() : "";
-    };
+    const next = () => {};
 
     useEffect(() => {
         axios({
@@ -108,7 +66,7 @@ const Reservation = ({ logedUser }) => {
     };
     return (
         // wrapper
-        <div className="flex justify-center items-center w-full h-[90.9%] bg-primaly dark:bg-gray-800">
+        <div className="flex justify-center items-center w-full h-[90.9%] bg-gray-200 dark:bg-gray-800">
             {/* Container */}
             <div className="flex flex-col justify-evenly items-center w-3/4 cxs:w-full csm:w-full h-4/5 ">
                 {step == 0 ? (
