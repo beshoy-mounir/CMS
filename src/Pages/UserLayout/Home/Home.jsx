@@ -8,16 +8,16 @@ const Home = () => {
             {/* Container */}
             <div className="flex flex-col gap-10 dark:bg-gray-800 dark:text-white">
                 {/* 1 */}
-                <div className="flex flex-col w-2/3 p-8 m-auto">
-                    <span className="text-[4rem] text-primaly dark:text-bluee">
+                <div className="flex flex-col gap-4 w-2/3 p-8 m-auto cxs:w-full csm:w-full cmd:w-full clg:w-full">
+                    <span className="font-bold text-[4rem] text-primaly dark:text-bluee cxs:text-xl csm:text-2xl cmd:text-[2rem] clg:text-[3rem]">
                         Book Your Appointment Today
                     </span>
-                    <span className="text-[2rem]">
+                    <span className="text-[2rem] cxs:text-lg csm:text-xl cmd:text-[18px] ">
                         Convenient Online Booking for Expert Care
                     </span>
                 </div>
                 {/* 2 */}
-                <div className="flex justify-evenly w-2/3 m-auto">
+                <div className="flex justify-evenly gap-4 w-2/3 p-8 m-auto cxs:flex-col cxs:w-full csm:flex-col csm:w-full cmd:w-full clg:w-full">
                     <div className="flex flex-col justify-evenly gap-5">
                         <span className="text-2xl font-bold text-primaly dark:text-bluee">
                             Services
@@ -43,12 +43,12 @@ const Home = () => {
                     </div>
                 </div>
                 {/* 3 */}
-                <div className="flex flex-col gap-5 w-2/3 p-8 m-auto">
-                    <span className="text-2xl font-bold text-primaly dark:text-bluee">
+                <div className="flex flex-col gap-5 w-2/3 p-8 m-auto cxs:w-full csm:w-full cmd:w-full clg:w-full">
+                    <span className="text-center text-2xl font-bold text-primaly dark:text-bluee">
                         Schedule Appointment
                     </span>
                     <div>
-                        <Link to="/doctors">
+                        <Link to="/doctors" className="flex justify-center">
                             <Button>Book Now</Button>
                         </Link>
                     </div>
