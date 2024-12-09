@@ -35,7 +35,7 @@ const MyReservation = () => {
     };
     return (
         // wrapper
-        <div className="bg-gray-200 dark:bg-gray-800 min-h-svh">
+        <div className="bg-gray-200 dark:bg-gray-800 min-h-[90.9%] h-fit">
             {/* Container */}
             <div className="flex flex-col gap-5 w-4/5 m-auto cxs:w-full csm:w-full cmd:w-full">
                 {/* 1 */}

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Button, Input, Option, Radio, Select } from "@material-tailwind/react";
 import axios from "axios";
+import { Button, Input, Option, Radio, Select } from "@material-tailwind/react";
+import { useForm } from "react-hook-form";
 
 const Reservation = ({ logedUser }) => {
-    // Style
-    const qStyle = "text-lg font-Inria";
     // Doctor Specialties List
     const medicalSpecialties = [
         "Allergy and Immunology",
@@ -29,20 +28,15 @@ const Reservation = ({ logedUser }) => {
     ];
     // Doctors
     const [doctor, eDoctor] = useState(null);
-    const [step, eStep] = useState(0);
-    const [user, eUser] = useState({
-        firstname: "",
-        lastname: "",
-        age: "",
-        gender: "",
-        specialties: "",
-        doctor: "",
-        note: "",
-        date: "",
-        hour: "",
-    });
+    const [gender, eGender] = useState(null);
 
-    const next = () => {};
+    const {
+        register,
+        handleSubmit,
+        formState: { errors, isSubmitting },
+        reset,
+    } = useForm();
+    console.log(logedUser);
 
     useEffect(() => {
         axios({
@@ -51,9 +45,14 @@ const Reservation = ({ logedUser }) => {
         }).then(({ data }) => eDoctor(data));
     }, []);
 
-    const postData = () => {
-        const newUser = { ...logedUser };
-        newUser.reservation.push(user);
+    const onSubmit = (data) => {
+        gender == "male" ? (data.gender = "male") : (data.gender = "female");
+        postData(data);
+        reset();
+    };
+    const postData = (data) => {
+        let newUser = { ...logedUser };
+        newUser.reservation.push(data);
         axios({
             method: "put",
             url: `${import.meta.env.VITE_USERS}/${localStorage.pi}`,
@@ -66,232 +65,193 @@ const Reservation = ({ logedUser }) => {
     };
     return (
         // wrapper
-        <div className="flex justify-center items-center w-full h-[90.9%] bg-gray-200 dark:bg-gray-800">
+        <div
+            className={`flex justify-center min-h-[90.9%] h-fit bg-gray-200 dark:bg-gray-800 shadow-xl`}>
             {/* Container */}
-            <div className="flex flex-col justify-evenly items-center w-3/4 cxs:w-full csm:w-full h-4/5 ">
-                {step == 0 ? (
-                    <span
-                        className={`${qStyle} bg-white p-10 rounded-lg dark:bg-gray-700 dark:text-white`}>
-                        We Hope You Get Better Soon
-                    </span>
-                ) : step == 1 ? (
-                    <div className="flex flex-col justify-evenly items-center h-1/2 w-1/2 cxs:w-4/5 csm:w-4/5 cmd:w-4/5 clg:w-4/5 cxl:w-2/3 bg-white px-5 py-8 rounded-lg dark:bg-gray-700 dark:text-white">
-                        <span className={`${qStyle}`}>What is Your Name</span>
-                        <Input
-                            className="dark:text-white"
-                            value={user.firstname}
-                            onChange={(e) =>
-                                eUser({ ...user, firstname: e.target.value })
-                            }
-                            label={
-                                <span className="dark:text-white">
-                                    First Name
-                                </span>
-                            }
-                            error={error.firstname}
-                        />
-                        <Input
-                            className="dark:text-white"
-                            value={user.lastname}
-                            onChange={(e) =>
-                                eUser({ ...user, lastname: e.target.value })
-                            }
-                            label={
-                                <span className="dark:text-white">
-                                    Last Name
-                                </span>
-                            }
-                            error={error.lastname}
-                        />
+            <div className="flex justify-center items-center w-1/3 py-8 px-2 h-[90.9%] rounded-lg bg-white dark:bg-gray-700 cxs:w-11/12 csm:p-3 csm:w-11/12 cmd:w-11/12 cmd:p-5 clg:w-2/3 clg:p-5 cxl:w-1/2 cxl:p-8 my-14 ">
+                <form
+                    onSubmit={handleSubmit(onSubmit)}
+                    className=" flex flex-col justify-center items-center gap-5 w-full">
+                    <div className="flex justify-between items-center w-full ">
+                        <div>
+                            <Input
+                                {...register("firstname", {
+                                    required: "First Name Is Required",
+                                    minLength: {
+                                        value: 4,
+                                        message: "First Name is too short",
+                                    },
+                                })}
+                                label={
+                                    <span className="text-black dark:text-white">
+                                        First Name
+                                    </span>
+                                }
+                                className="text-black dark:text-white"
+                                error={errors.firstname}
+                            />
+                            {errors.firstname && (
+                                <p className="text-red-500">
+                                    {errors.firstname.message}
+                                </p>
+                            )}
+                        </div>
+                        {/* last Name */}
+                        <div>
+                            <Input
+                                {...register("lastname", {
+                                    required: "last Name Is Required",
+                                    minLength: {
+                                        value: 4,
+                                        message: "Last Name is too short",
+                                    },
+                                })}
+                                label={
+                                    <span className="text-black dark:text-white">
+                                        Last Name
+                                    </span>
+                                }
+                                className="text-black dark:text-white"
+                                error={errors.lastname}
+                            />
+                            {errors.lastname && (
+                                <p className="text-red-500">
+                                    {errors.lastname.message}
+                                </p>
+                            )}
+                        </div>
                     </div>
-                ) : step == 2 ? (
-                    <div className="flex flex-col justify-evenly items-center h-1/2 w-1/2 cxs:w-4/5 csm:w-4/5 cmd:w-4/5 clg:w-4/5 cxl:w-2/3 bg-white px-5 py-8 rounded-lg dark:bg-gray-700 dark:text-white">
-                        <span className={`${qStyle}`}>How Old Are You</span>
-                        <Input
-                            className="dark:text-white"
-                            value={user.age}
-                            onChange={(e) =>
-                                isNaN(e.target.value)
-                                    ? ""
-                                    : eUser({ ...user, age: e.target.value })
-                            }
-                            label={<span className="dark:text-white">Age</span>}
-                            inputMode="numeric"
-                            maxLength={2}
-                            error={error.age}
-                        />
-                        <div className="flex justify-evenly w-full">
+                    {/* Age */}
+                    <Input
+                        {...register("age", {
+                            required: "Age Is required",
+                            maxLength: {
+                                value: 2,
+                                message: "Not a valid Age",
+                            },
+                        })}
+                        label={
+                            <span className="text-black dark:text-white">
+                                Age
+                            </span>
+                        }
+                        className="text-black dark:text-white"
+                        error={errors.age}
+                    />
+                    {errors.age && (
+                        <p className="text-red-500">{errors.age.message}</p>
+                    )}
+                    {/* Gender */}
+                    <div className="flex flex-col justify-center items-center">
+                        <div className="flex justify-evenly items-center">
                             <Radio
-                                name="gender"
-                                color="blue"
+                                {...register("gender", {
+                                    required: "Gender Is required",
+                                })}
                                 label={
                                     <span className="dark:text-white">
                                         Male
                                     </span>
                                 }
-                                checked={user.gender == "male" ? true : false}
-                                onClick={() =>
-                                    eUser({ ...user, gender: "male" })
-                                }
-                                error={error.gender}
+                                color="blue"
+                                error={errors.gender}
+                                onChange={() => eGender("male")}
                             />
                             <Radio
-                                name="gender"
-                                color="blue"
+                                {...register("gender", {
+                                    required: "Gender Is required",
+                                })}
                                 label={
                                     <span className="dark:text-white">
                                         Female
                                     </span>
                                 }
-                                checked={user.gender == "female" ? true : false}
-                                onClick={() =>
-                                    eUser({ ...user, gender: "female" })
-                                }
-                                error={error.gender}
-                            />
-                        </div>
-                    </div>
-                ) : step == 3 ? (
-                    <div className="flex flex-col justify-start items-center gap-5 h-fit w-1/2 cxs:w-4/5 csm:w-4/5 cmd:w-4/5 clg:w-4/5 cxl:w-2/3 bg-white px-5 py-8 rounded-lg dark:bg-gray-700  dark:text-white">
-                        <span className={`${qStyle}`}>Choose Specialties</span>
-                        <div className="p-2 w-full bg-white rounded-lg">
-                            <Select
-                                label="Specialties"
-                                value={user.specialties}
-                                onChange={() => {}}
                                 color="blue"
-                                error={error.specialties}>
-                                {medicalSpecialties.map((item, index) => (
-                                    <Option
-                                        className="text-primaly"
-                                        key={index}
-                                        value={item}
-                                        onClick={(e) =>
-                                            eUser({
-                                                ...user,
-                                                specialties: item,
-                                            })
-                                        }>
-                                        {item}
-                                    </Option>
-                                ))}
-                            </Select>
-                        </div>
-                        <span className={`${qStyle}`}>Choose Doctor</span>
-                        <div className="p-2 w-full bg-white rounded-lg">
-                            <Select
-                                label="Doctor"
-                                value={user.doctor}
-                                onChange={() => {}}
-                                color="blue">
-                                {doctor?.map((item, index) =>
-                                    user?.specialties == item.specialties ? (
-                                        <Option
-                                            className="text-primaly"
-                                            key={index}
-                                            value={item?.firstname}
-                                            onClick={(e) =>
-                                                eUser({
-                                                    ...user,
-                                                    doctor: item?.firstname,
-                                                })
-                                            }>
-                                            {`${item?.firstname} ${item?.lastname}`}
-                                        </Option>
-                                    ) : (
-                                        ""
-                                    )
-                                )}
-                            </Select>
-                        </div>
-                    </div>
-                ) : step == 4 ? (
-                    <div className="flex flex-col justify-evenly items-center gap-5 h-1/2 w-1/2 cxs:w-4/5 csm:w-4/5 cmd:w-4/5 clg:w-4/5 cxl:w-2/3 bg-white rounded-lg dark:bg-gray-700 dark:text-white">
-                        <span>ADD Note (optional)</span>
-                        <textarea
-                            value={user.note}
-                            onChange={(e) =>
-                                eUser({ ...user, note: e.target.value })
-                            }
-                            className="w-3/4 h-2/3 p-3  mb-5 resize-none dark:bg-gray-600 rounded-lg outline outline-1 outline-gray-800 focus:outline-2"></textarea>
-                    </div>
-                ) : step == 5 ? (
-                    <div className="flex flex-col justify-evenly items-center h-1/2 w-1/2 cxs:w-4/5 csm:w-4/5 cmd:w-4/5 clg:w-4/5 cxl:w-2/3 bg-white rounded-lg dark:bg-gray-700 dark:text-white">
-                        <span className={`${qStyle}`}>Date of Reservation</span>
-                        <div className="flex flex-col justify-between items-center gap-3 w-3/4">
-                            <Input
-                                className="dark:text-white"
-                                value={user.date}
-                                onChange={(e) =>
-                                    isNaN(e.target.value)
-                                        ? ""
-                                        : eUser({
-                                              ...user,
-                                              date: e.target.value,
-                                          })
-                                }
-                                label={
-                                    <span className="dark:text-white">
-                                        Date
-                                    </span>
-                                }
-                                inputMode="numeric"
-                                error={error.date}
-                            />
-                            <Input
-                                className="dark:text-white"
-                                value={user.hour}
-                                onChange={(e) =>
-                                    isNaN(e.target.value)
-                                        ? ""
-                                        : eUser({
-                                              ...user,
-                                              hour: e.target.value,
-                                          })
-                                }
-                                label={
-                                    <span className="dark:text-white">
-                                        Hour
-                                    </span>
-                                }
-                                inputMode="numeric"
-                                error={error.hour}
+                                error={errors.gender}
+                                onChange={() => eGender("female")}
                             />
                         </div>
+                        {errors.gender && (
+                            <p className="text-red-500">
+                                {errors.gender.message}
+                            </p>
+                        )}
                     </div>
-                ) : (
-                    ""
-                )}
-                {/* buttons */}
-                <div className="flex flex-col items-center gap-3 w-1/2 cxs:w-4/5 csm:w-4/5">
+                    {/* Doctors & specialties */}
+                    <div className="flex justify-between items-center w-full ">
+                        <div>
+                            <Input
+                                {...register("doctor", {
+                                    required: "Doctor Is required",
+                                })}
+                                label={
+                                    <span className="text-black dark:text-white">
+                                        Doctor
+                                    </span>
+                                }
+                                className="text-black dark:text-white"
+                                error={errors.doctor}
+                            />
+                            {errors.doctor && (
+                                <p className="text-red-500">
+                                    {errors.doctor.message}
+                                </p>
+                            )}
+                        </div>
+                        <div>
+                            <Input
+                                {...register("specialties", {
+                                    required: "specialties Is required",
+                                    minLength: {
+                                        value: 8,
+                                        message: "Specialties is too short",
+                                    },
+                                })}
+                                label={
+                                    <span className="text-black dark:text-white">
+                                        specialties
+                                    </span>
+                                }
+                                className="text-black dark:text-white"
+                                error={errors.specialties}
+                            />
+                            {errors.specialties && (
+                                <p className="text-red-500">
+                                    {errors.specialties.message}
+                                </p>
+                            )}
+                        </div>
+                    </div>
+                    {/* Note */}
+                    <Input
+                        {...register("note")}
+                        label={
+                            <span className="text-black dark:text-white">
+                                Note
+                            </span>
+                        }
+                        className="text-black dark:text-white"
+                        error={errors.note}
+                    />
+                    {errors.note && (
+                        <p className="text-red-500">{errors.note.message}</p>
+                    )}
+                    {/* Buttons */}
                     <div className="flex justify-evenly items-center w-full">
                         <Button
-                            onClick={() => eStep(step - 1)}
-                            className={`${step == 0 ? "hidden" : ""}`}>
-                            Back
+                            onClick={() => reset()}
+                            color="red"
+                            className="">
+                            clear
                         </Button>
-                        <Button onClick={() => next()}>
-                            {step == 5 ? "Send" : "Continue"}
+                        <Button
+                            className=""
+                            disabled={isSubmitting}
+                            type="submit">
+                            Send
                         </Button>
                     </div>
-                    <Button
-                        className={`${
-                            step == 0 ? "hidden" : ""
-                        } w-1/2 cxs:w-4/5 csm:w-4/5 cmd:w-full clg:w-4/5 cxl:w-4/5`}
-                        onClick={() =>
-                            eUser({
-                                ...user,
-                                firstname: logedUser?.firstname,
-                                lastname: logedUser?.lastname,
-                                age:
-                                    new Date().getFullYear() -
-                                    logedUser?.birthday.slice(0, 4),
-                                gender: logedUser?.gender,
-                            })
-                        }>
-                        Continue With User Info
-                    </Button>
-                </div>
+                </form>
             </div>
         </div>
     );
